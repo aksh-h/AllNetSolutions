@@ -15,8 +15,8 @@ namespace AllNetSolutions.Controllers
     {
 
         [HttpGet]
-        [Route("get")]
-        public async Task<IHttpActionResult> GetData()
+        [Route("first")]
+        public async Task<IHttpActionResult> GetfirstData()
         {
             List<Result> dicts = new List<Result>();
             try
@@ -24,7 +24,67 @@ namespace AllNetSolutions.Controllers
                 var tasks = new List<Task<(string, TimeSpan)>>();
 
                 tasks.Add(CheckNumber());
+
+                var response = await Task.WhenAll(tasks);
+                for (int i = 0; i < response.Length; i++)
+                {
+                    var dict = new Result();
+                    dict.status = response[i].Item1;
+                    dict.timeTaken = response[i].Item2;
+                    dicts.Add(dict);
+                }
+                return Content(HttpStatusCode.OK, dicts);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new Dictionary<string, string>()
+                {
+                    { "error", ex.Message }
+                };
+                return Content(HttpStatusCode.InternalServerError, errorResult);
+            }
+        }
+
+        [HttpGet]
+        [Route("second")]
+        public async Task<IHttpActionResult> GetsecondData()
+        {
+            List<Result> dicts = new List<Result>();
+            try
+            {
+                var tasks = new List<Task<(string, TimeSpan)>>();
+
                 tasks.Add(CheckNumber());
+
+                var response = await Task.WhenAll(tasks);
+                for (int i = 0; i < response.Length; i++)
+                {
+                    var dict = new Result();
+                    dict.status = response[i].Item1;
+                    dict.timeTaken = response[i].Item2;
+                    dicts.Add(dict);
+                }
+                return Content(HttpStatusCode.OK, dicts);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new Dictionary<string, string>()
+                {
+                    { "error", ex.Message }
+                };
+                return Content(HttpStatusCode.InternalServerError, errorResult);
+            }
+        }
+
+        [HttpGet]
+        [Route("third")]
+        public async Task<IHttpActionResult> GetthirdData()
+        {
+            List<Result> dicts = new List<Result>();
+            try
+            {
+                var tasks = new List<Task<(string, TimeSpan)>>();
+
                 tasks.Add(CheckNumber());
 
                 var response = await Task.WhenAll(tasks);
