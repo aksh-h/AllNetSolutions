@@ -109,14 +109,63 @@ namespace AllNetSolutions.Controllers
 
         private async Task<(string, TimeSpan)> CheckNumber()
         {
-            var random = new Random();
-            var number = random.Next(10);
-            var isEven = number % 2 == 0;
-            var status = isEven ? "success" : "failed";
-            //var timeToWait = random.Next(6);
+            try
+            {
+                // generate random array of numbers of length 10
 
-            await Task.Delay(TimeSpan.FromSeconds(number));
-            return (status, TimeSpan.FromSeconds(number));
+                int[] numb = new int[10];
+                Random rnd = new Random();
+                for (int i = 0; i < numb.Length; i++)
+                {
+                    numb[i] = rnd.Next(1, 10);
+                }
+
+                // perform binary search on the array
+                int min = 0;
+                int max = numb.Length - 1;
+                int mid = 0;
+
+                // take the minimum of the array as search element
+
+                int search = numb.Min();
+                bool found = false;
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                while (min <= max)
+                {
+                    mid = (min + max) / 2;
+                    if (numb[mid] == search)
+                    {
+                        found = true;
+                        break;
+                    }
+                    else if (numb[mid] < search)
+                    {
+                        min = mid + 1;
+                    }
+                    else
+                    {
+                        max = mid - 1;
+                    }
+                }
+                stopwatch.Stop();
+                if (found)
+                {
+                    return ("success", stopwatch.Elapsed);
+                }
+                else
+                {
+                    return ("failed", stopwatch.Elapsed);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return ("failed", TimeSpan.Zero);
+            }
+
+
+
         }
     }
     public class Result
