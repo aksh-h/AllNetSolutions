@@ -107,7 +107,7 @@ namespace AllNetSolutions.Controllers
             }
         }
 
-        private async Task<(string, TimeSpan)> CheckNumber()
+        private async Task<(string, TimeSpan)> CheckNumber(int num = 0)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace AllNetSolutions.Controllers
 
                 // take the minimum of the array as search element
 
-                int search = numb.Min();
+                int search = num == 0 ? numb.Min() : num;
                 bool found = false;
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -166,6 +166,36 @@ namespace AllNetSolutions.Controllers
 
 
 
+        }
+
+        [HttpGet]
+        [Route("checknumberexist/{num}")]
+        public async Task<IHttpActionResult> GetthirdData(int num)
+        {
+            List<Result> dicts = new List<Result>();
+            try
+            {
+
+                Task<(string, TimeSpan)> t = CheckNumber();
+
+                var response = await Task.WhenAll(t);
+                for (int i = 0; i < response.Length; i++)
+                {
+                    var dict = new Result();
+                    dict.status = response[i].Item1;
+                    dict.timeTaken = response[i].Item2;
+                    dicts.Add(dict);
+                }
+                return Content(HttpStatusCode.OK, dicts);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new Dictionary<string, string>()
+                {
+                    { "error", ex.Message }
+                };
+                return Content(HttpStatusCode.InternalServerError, errorResult);
+            }
         }
     }
     public class Result
