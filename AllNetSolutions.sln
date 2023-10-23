@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllNetSolutions", "AllNetSo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITests", "APITests\APITests.csproj", "{E2700A30-FC95-4A8B-8FC4-A28AE04AA0C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConditionalStatement", "ConditionalStatement\ConditionalStatement.csproj", "{64B0AEF2-7309-42A1-972B-309072DC144F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E2700A30-FC95-4A8B-8FC4-A28AE04AA0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2700A30-FC95-4A8B-8FC4-A28AE04AA0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2700A30-FC95-4A8B-8FC4-A28AE04AA0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B0AEF2-7309-42A1-972B-309072DC144F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B0AEF2-7309-42A1-972B-309072DC144F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B0AEF2-7309-42A1-972B-309072DC144F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B0AEF2-7309-42A1-972B-309072DC144F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
